@@ -1,0 +1,44 @@
+<!-- templates/signup.html -->
+{% extends 'base.html' %}
+{% include "base.html" %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+{% if error %}
+<br />
+<span class="error-message">{{ error }}</span>
+<br />
+<br />
+{% endif %}
+<h2>Sign up</h2>
+<form method="POST">
+    {% csrf_token %}
+    Email:
+    <br />
+    <input type="email" name="email" />
+    <br />
+    <br />
+    Full Name:
+    <br />
+    <input type="text" name="full_name" />
+    <br />
+    <br />
+    Date of Birth:
+    <br />
+    <input type="date" name="date_of_birth" />
+    <br />
+    <br />
+    Password:
+    <br />
+    <input type="password" name="password1" />
+    <br />
+    <br />
+    Confirm Password:
+    <br />
+    <input type="password" name="password2" />
+    <br />
+    <br />
+    <button type="submit">Sign up</button>
+  </form>
+{% endblock %}
