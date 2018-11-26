@@ -57,7 +57,7 @@ ROOT_URLCONF = 'SR_Team.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': ['users/templates/'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -137,3 +137,4 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'sprintrise.webdev@gmail.com'
 EMAIL_HOST_PASSWORD = '746#@*^vcXw1'
 EMAIL_PORT = 587
+DEFAULT_FROM_EMAIL = 'SprintRise Team <noreply@example.com>'

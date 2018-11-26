@@ -1,7 +1,6 @@
 # users/views.py
 from django.shortcuts import render, redirect
 from django.contrib import auth
-from django.http import HttpResponse
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -40,7 +39,7 @@ def SignUp(request):
                     mail_subject, message, to=[to_email]
                     )
                     email.send()
-                    return HttpResponse('Please confirm your email address to complete the registration')
+                    return render(request, 'email_confirmation.html')
             else:
                     return render(request, 'signup.html', {'error': 'Passwords must match!'})
     else:
@@ -57,9 +56,9 @@ def activate(request, uidb64, token):
         user.is_active = True
         user.save()
         auth.login(request, user)
-        return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
+        return redirect('home')
     else:
-        return HttpResponse('Activation link is invalid!')
+        return render(request, 'activation_link_invalid.html')
 
 def login(request):
     if request.method == 'POST':
@@ -71,3 +70,6 @@ def login(request):
             return render (request, 'login.html', {'error': 'Email or Password is Incorrect'})
     else:
         return render (request, 'login.html')
+
+def password_reset(request):
+    return render (request, 'registration/password_reset_form.html')
