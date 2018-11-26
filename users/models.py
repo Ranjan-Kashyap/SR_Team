@@ -1,13 +1,13 @@
 # users/models.py
 from django.contrib.auth.models import PermissionsMixin, AbstractBaseUser, BaseUserManager
 from django.db import models
-from simple_email_confirmation.models import SimpleEmailConfirmationUserMixin
 
 class CustomAccountManager(BaseUserManager):
 
     def create_user(self, email, full_name, date_of_birth, password):
         user = self.model(email=email, full_name=full_name, date_of_birth=date_of_birth, password=password)
         user.set_password(password)
+        user.is_active = False
         user.is_staff = False
         user.is_superuser = False
         user.save(using=self._db)
@@ -26,7 +26,7 @@ class CustomAccountManager(BaseUserManager):
         print(email_)
         return self.get(email=email_)
 
-class CustomUser(AbstractBaseUser, PermissionsMixin, SimpleEmailConfirmationUserMixin):
+class CustomUser(AbstractBaseUser, PermissionsMixin):
     # add additional fields in here
     email = models.EmailField(max_length=255, unique=True)
     full_name = models.CharField(max_length=150)

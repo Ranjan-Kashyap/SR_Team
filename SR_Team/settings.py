@@ -130,3 +130,10 @@ STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = 'home' #new
 LOGOUT_REDIRECT_URL = 'home' #new
+
+#Email settings
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'sprintrise.webdev@gmail.com'
+EMAIL_HOST_PASSWORD = '746#@*^vcXw1'
+EMAIL_PORT = 587

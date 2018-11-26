@@ -1,13 +1,3 @@
-# from django import forms
-# from django.contrib.auth.forms import UserCreationForm
-# from .models import CustomUser
-#
-# class CustomUserForm(UserCreationForm):
-#     class Meta(UserCreationForm.Meta):
-#         model = CustomUser
-#         fields = ('email', 'full_name', 'date_of_birth')
-# error_css_class = 'error'
-
 # users/forms.py
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
