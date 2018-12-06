@@ -8,6 +8,7 @@ from django.template.loader import render_to_string
 from .tokens import account_activation_token
 from django.core.mail import EmailMessage
 from .models import CustomUser
+from datetime import timedelta, date
 
 from .forms import CustomUserCreationForm
 
@@ -73,3 +74,23 @@ def login(request):
 
 def password_reset(request):
     return render (request, 'registration/password_reset_form.html')
+
+def birthday(request):
+    users_list = CustomUser.objects.values()
+    person_list = users_list.distinct()  # ensure persons are only in the list once
+    today = date.today()
+    birthday_person = []
+    birthday_person.extend(list(person_list.filter(date_of_birth__month=today.month, date_of_birth__day=today.day))) # get the birthday people having birthday today from the list
+    birthdays_this_month = []
+    birthdays_this_month.extend(list(person_list.filter(date_of_birth__month=today.month))) # get the birthday pepople having birthday this month from the list
+    for item in birthdays_this_month:  # Modify key strings the list of dictionaries
+        item["Name"] = item.pop("full_name")
+        item["Date of Birth"] = item.pop("date_of_birth")
+    wanted_keys = ['Name', 'Date of Birth'] # list to mention only required keys
+    if len(birthday_person) == 0:
+        return render (request, 'birthday.html',{'birthdays_this_month': birthdays_this_month, 'wanted_keys': wanted_keys})
+    else:
+        names = []
+        for name in birthday_person:
+            names.append(name.get('full_name'))
+        return render (request, 'birthday.html',{'birthday_person':names, 'birthdays_this_month': birthdays_this_month, 'wanted_keys': wanted_keys})

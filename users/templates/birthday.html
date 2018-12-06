@@ -2,8 +2,6 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% include "base.html" %}
-
-
 {% block title %}Home{% endblock %}
 {% block content %}
 {% if user.is_authenticated %}
@@ -14,4 +12,23 @@
   <a href="{% url 'login' %}">login</a> |
   <a href="{% url 'signup' %}">signup</a>
 {% endif %}
+<p>People having birthday today:</p>
+{% for name in birthday_person %}
+    {{ name }}
+    <br />
+{% endfor %}
+<br />
+<br />
+<p>People having birthday this month:</p>
+{% for person in birthdays_this_month %}
+    {% for key , value in person.items %}
+        {% if key in wanted_keys %}
+            <p>
+            {{key}} : {{value}} 
+            </p>
+        {% endif %}
+    {% endfor %}
+    <br />
+{% endfor %}
+
 {% endblock %}

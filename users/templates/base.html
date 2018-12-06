@@ -30,7 +30,7 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav ml-auto">
       {% if user.is_authenticated %}
-      <p class="navbar-text"><span style="text-decoration: underline" class="brand-color">Hi {{ user.full_name }}!</span></p>
+      <p class="navbar-text"><span style="text-decoration: underline" class="brand-color">Hi {{ user.get_short_name }}!</span></p>
       &nbsp; &nbsp; &nbsp; &nbsp;
       <a class="nav-item nav-link" href="javascript:{document.getElementById('logout').submit()}">Logout</a>
       <form id="logout" method="POST" action="{% url 'logout' %}">

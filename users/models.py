@@ -40,7 +40,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     objects = CustomAccountManager()
 
     def get_short_name(self):
-        return self.email
+        return self.full_name.split()[0]
 
     def natural_key(self):
         return self.email
